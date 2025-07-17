@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DarkDevil QR Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #1a001a, #330033);
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ff0066;
+      margin-bottom: 20px;
+    }
+    .qr-container {
+      background: #111;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    input[type="text"] {
+      padding: 12px;
+      width: 250px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1rem;
+      background: #222;
+      color: #fff;
+    }
+    button {
+      padding: 12px 20px;
+      background: #ff0066;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #cc0052;
+    }
+    canvas {
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>DarkDevil QR Generator</h1>
+  <div class="qr-container">
+    <input type="text" id="qrInput" placeholder="Enter your secret text">
+    <button onclick="generateQR()">Generate QR Code</button>
+    <canvas id="qrCanvas"></canvas>
+  </div>
+  <footer>Made by WhiteDevil & DarkDevil Duo 😈</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+  <script>
+    function generateQR() {
+      const input = document.getElementById("qrInput").value;
+      const canvas = document.getElementById("qrCanvas");
+      if (!input) {
+        alert("Please enter text to generate QR code.");
+        return;
+      }
+      QRCode.toCanvas(canvas, input, {
+        color: {
+          dark: "#ff0066",
+          light: "#0000"
+        },
+        width: 256,
+        margin: 2
+      }, function (error) {
+        if (error) console.error(error);
+        else console.log("QR code generated!");
+      });
+    }
+  </script>
+</body>
+</html>
